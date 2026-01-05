@@ -1,0 +1,43 @@
+/* App.css */
+
+/* Za cijeli body mozete postaviti margin/padding i osnovne fontove */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+}
+
+/* Stil za home-page sekciju (fullscreen background) */
+.home-page {
+  background: url("../public/stari-most.jpg") no-repeat center center/cover;
+  width: 100vw;
+  height: 100vh;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Kontejner za dugmad */
+.home-buttons {
+  text-align: center;
+  background-color: rgba(255, 255, 255, 0.7); /* da se malo vidi slika iza */
+  padding: 20px;
+  border-radius: 8px;
+}
+
+/* Stil za dugmad, koristimo tirkizne nijanse */
+.home-buttons button {
+  background-color: #20b2aa; /* tirkizna: LightSeaGreen */
+  color: #ffffff;
+  border: none;
+  padding: 15px 25px;
+  margin: 10px;
+  font-size: 16px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.home-buttons button:hover {
+  background-color: #2e8b57; /* malo tamnija zelena */
+}
