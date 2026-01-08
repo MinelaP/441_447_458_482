@@ -18,7 +18,7 @@ function Trips() {
     }, []);
 
     const fetchTrips = () => {
-        fetch('http://localhost:3000/trips')
+        fetch('/trips')
             .then((res) => res.json())
             .then((data) => setTrips(Array.isArray(data) ? data : []))
             .catch((err) => console.error(err));
@@ -26,7 +26,7 @@ function Trips() {
 
     const addTrip = (event) => {
         event.preventDefault();
-        fetch('http://localhost:3000/trips', {
+        fetch('/trips', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(newTrip),
@@ -53,7 +53,7 @@ function Trips() {
         event.preventDefault();
         if (!editingTrip) return;
 
-        fetch(`http://localhost:3000/trips/${editingTrip.id}`,
+        fetch(`/trips/${editingTrip.id}`,
             {
                 method: 'PUT',
                 headers: { 'Content-Type': 'application/json' },
@@ -68,7 +68,7 @@ function Trips() {
     };
 
     const deleteTrip = (id) => {
-        fetch(`http://localhost:3000/trips/${id}`,
+        fetch(`/trips/${id}`,
             {
                 method: 'DELETE',
             })

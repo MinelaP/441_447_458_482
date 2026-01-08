@@ -20,7 +20,7 @@ function Travelers() {
     }, []);
 
     const fetchTravelers = () => {
-        fetch('http://localhost:3000/travelers') // ili samo '/travelers' ako imate proxy
+        fetch('/travelers')// ili samo '/travelers' ako imate proxy
             .then((res) => res.json())
             .then((data) => setTravelers(data))
             .catch((err) => console.error('Error:', err));
@@ -29,7 +29,7 @@ function Travelers() {
     // Dodavanje novog traveler-a
     const addTraveler = (e) => {
         e.preventDefault();
-        fetch('http://localhost:3000/travelers', {
+        fetch('/travelers', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(newTraveler),
@@ -52,7 +52,7 @@ function Travelers() {
         e.preventDefault();
         if (!editingTraveler) return;
 
-        fetch(`http://localhost:3000/travelers/${editingTraveler.id}`, {
+        fetch(`/travelers/${editingTraveler.id}`, {
             method: 'PUT',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(editingTraveler),
@@ -67,7 +67,7 @@ function Travelers() {
 
     // Brisanje
     const deleteTraveler = (id) => {
-        fetch(`http://localhost:3000/travelers/${id}`, {
+        fetch(`/travelers/${id}`, {
             method: 'DELETE',
         })
             .then((res) => res.json())

@@ -12,7 +12,7 @@ function Agencies() {
     }, []);
 
     const fetchAgencies = () => {
-        fetch('http://localhost:3000/agencies')
+        fetch('/agencies')
             .then((res) => res.json())
             .then((data) => setAgencies(Array.isArray(data) ? data : []))
             .catch((err) => console.error('Error:', err));
@@ -20,7 +20,7 @@ function Agencies() {
 
     const addAgency = (event) => {
         event.preventDefault();
-        fetch('http://localhost:3000/agencies', {
+        fetch('/agencies', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(newAgency),
@@ -41,7 +41,7 @@ function Agencies() {
         event.preventDefault();
         if (!editingAgency) return;
 
-        fetch(`http://localhost:3000/agencies/${editingAgency.id}`,
+        fetch(`/agencies/${editingAgency.id}`,
             {
                 method: 'PUT',
                 headers: { 'Content-Type': 'application/json' },
@@ -56,7 +56,7 @@ function Agencies() {
     };
 
     const deleteAgency = (id) => {
-        fetch(`http://localhost:3000/agencies/${id}`,
+        fetch(`/agencies/${id}`,
             {
                 method: 'DELETE',
             })
