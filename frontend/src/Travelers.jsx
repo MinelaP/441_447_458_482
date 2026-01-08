@@ -79,10 +79,11 @@ function Travelers() {
 
     return (
         <div style={styles.pageContainer}>
-            <h1 style={styles.title}>Travelers</h1>
+            <div style={styles.contentWrapper}>
+                <h1 style={styles.title}>Travelers</h1>
 
             {/* Forma za dodavanje novog traveler-a */}
-            <form onSubmit={addTraveler} style={styles.form}>
+                <form onSubmit={addTraveler} style={styles.form}>
                 <h3>Dodaj novog Traveler-a</h3>
                 <input
                     style={styles.input}
@@ -109,11 +110,11 @@ function Travelers() {
                     required
                 />
                 <button style={styles.button} type="submit">Dodaj</button>
-            </form>
+                </form>
 
             {/* Forma za edit ako editingTraveler != null */}
-            {editingTraveler && (
-                <form onSubmit={updateTraveler} style={styles.form}>
+                {editingTraveler && (
+                    <form onSubmit={updateTraveler} style={styles.form}>
                     <h3>Ažuriraj Traveler-a</h3>
                     <p>ID: {editingTraveler.id}</p>
                     <input
@@ -132,41 +133,43 @@ function Travelers() {
                         onChange={(e) => setEditingTraveler({ ...editingTraveler, age: e.target.value })}
                         required
                     />
-                    <button style={styles.button} type="submit">Sačuvaj</button>
-                    <button style={styles.buttonCancel} type="button" onClick={() => setEditingTraveler(null)}>Odustani</button>
-                </form>
-            )}
+                        <button style={styles.button} type="submit">Sačuvaj</button>
+                        <button style={styles.buttonCancel} type="button" onClick={() => setEditingTraveler(null)}>Odustani</button>
+                    </form>
+                )}
 
             {/* Lista svih travelers */}
-            <div>
-                <h3 style={styles.subTitle}>Lista Traveler-a</h3>
-                {travelers.length === 0 ? (
-                    <p>Nema upisanih traveler-a</p>
-                ) : (
-                    <table style={styles.table}>
-                        <thead>
-                        <tr>
-                            <th>ID</th>
-                            <th>Ime</th>
-                            <th>Godine</th>
-                            <th>Akcije</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        {travelers.map((trav) => (
-                            <tr key={trav.id}>
-                                <td>{trav.id}</td>
-                                <td>{trav.name}</td>
-                                <td>{trav.age}</td>
-                                <td>
-                                    <button style={styles.buttonSmall} onClick={() => startEditing(trav)}>Edit</button>
-                                    <button style={styles.buttonDelete} onClick={() => deleteTraveler(trav.id)}>Obriši</button>
-                                </td>
+                <div>
+                    <h3 style={styles.subTitle}>Lista Traveler-a</h3>
+                    {travelers.length === 0 ? (
+                        <p>Nema upisanih traveler-a</p>
+                    ) : (
+                        <table style={styles.table}>
+                            <thead>
+                            <tr>
+                                <th style={styles.tableHeaderCell}>ID</th>
+                                <th style={styles.tableHeaderCell}>Ime</th>
+                                <th style={styles.tableHeaderCell}>Godine</th>
+                                <th style={styles.tableHeaderCell}>Akcije</th>
                             </tr>
-                        ))}
-                        </tbody>
-                    </table>
-                )}
+                            </thead>
+                            <tbody>
+                            {travelers.map((trav) => (
+                                <tr key={trav.id}>
+                                    <td style={styles.tableCell}>{trav.id}</td>
+                                    <td style={styles.tableCell}>{trav.name}</td>
+                                    <td style={styles.tableCell}>{trav.age}</td>
+                                    <td style={styles.tableCell}>
+                                        <button style={styles.buttonSmall} onClick={() => startEditing(trav)}>Edit</button>
+                                        <button style={styles.buttonDelete} onClick={() => deleteTraveler(trav.id)}>Obriši</button>
+                                    </td>
+                                </tr>
+                            ))}
+                            </tbody>
+                        </table>
+                    )}
+                </div>
+
             </div>
         </div>
     );
@@ -179,6 +182,11 @@ const styles = {
         backgroundColor: '#e0f2f1', // svijetlo tirkizna pozadina
         minHeight: '100vh'
     },
+    contentWrapper: {
+        width: '100%',
+        maxWidth: '1080px',
+        margin: '0 auto'
+    },
     title: {
         color: '#00695c' // tamnija zelena
     },
@@ -189,7 +197,7 @@ const styles = {
         backgroundColor: '#ffffff',
         padding: '10px',
         marginBottom: '20px',
-        borderRadius: '8px'
+        borderRadius: '10px'
     },
     input: {
         display: 'block',
@@ -204,7 +212,7 @@ const styles = {
         padding: '8px 16px',
         marginRight: '10px',
         cursor: 'pointer',
-        borderRadius: '4px'
+        borderRadius: '10px'
     },
     buttonCancel: {
         backgroundColor: '#c62828',
@@ -212,7 +220,7 @@ const styles = {
         border: 'none',
         padding: '8px 16px',
         cursor: 'pointer',
-        borderRadius: '4px'
+        borderRadius: '10px'
     },
     buttonSmall: {
         backgroundColor: '#20b2aa',
@@ -221,7 +229,7 @@ const styles = {
         padding: '5px 10px',
         marginRight: '5px',
         cursor: 'pointer',
-        borderRadius: '4px'
+        borderRadius: '10px'
     },
     buttonDelete: {
         backgroundColor: '#c62828',
@@ -229,11 +237,20 @@ const styles = {
         border: 'none',
         padding: '5px 10px',
         cursor: 'pointer',
-        borderRadius: '4px'
+        borderRadius: '10px'
     },
     table: {
         borderCollapse: 'collapse',
-        width: '100%'
+        width: '100%',
+        textAlign: 'left',
+        backgroundColor: '#ffffff',
+        borderRadius: '10px',
+        overflow: 'hidden'
+    },
+    tableHeaderCell: {
+        textAlign: 'left',
+        padding: '10px',
+        borderBottom: '1px solid #cfd8dc'
     },
 };
 

@@ -68,10 +68,11 @@ function Agencies() {
 
     return (
         <div style={styles.pageContainer}>
-            <button onClick={() => navigate('/')}>← Nazad na početnu</button>
-            <h1 style={styles.title}>Agencije</h1>
+            <div style={styles.contentWrapper}>
+                <button style={styles.backButton} onClick={() => navigate('/')}>← Nazad na početnu</button>
+                <h1 style={styles.title}>Agencije</h1>
 
-            <form onSubmit={addAgency} style={styles.form}>
+                <form onSubmit={addAgency} style={styles.form}>
                 <h3>Dodaj novu agenciju</h3>
 
                 <input
@@ -98,11 +99,11 @@ function Agencies() {
                     required
                 />
                 <button style={styles.button} type="submit">Dodaj</button>
-            </form>
+                </form>
 
-            {editingAgency && (
-                <form onSubmit={updateAgency} style={styles.form}>
-                    <h3>Ažuriraj agenciju</h3>
+                {editingAgency && (
+                    <form onSubmit={updateAgency} style={styles.form}>
+                        <h3>Ažuriraj agenciju</h3>
                     <p>ID: {editingAgency.id}</p>
                     <input
                         style={styles.input}
@@ -127,42 +128,43 @@ function Agencies() {
                         onChange={(e) => setEditingAgency({ ...editingAgency, email: e.target.value })}
                         required
                     />
-                    <button style={styles.button} type="submit">Sačuvaj</button>
-                    <button style={styles.buttonCancel} type="button" onClick={() => setEditingAgency(null)}>Odustani</button>
-                </form>
-            )}
-
-            <div>
-                <h3 style={styles.subTitle}>Lista agencija</h3>
-                {agencies.length === 0 ? (
-                    <p>Nema upisanih agencija</p>
-                ) : (
-                    <table style={styles.table}>
-                        <thead>
-                        <tr>
-                            <th>ID</th>
-                            <th>Naziv</th>
-                            <th>Adresa</th>
-                            <th>Email</th>
-                            <th>Akcije</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        {agencies.map((agency) => (
-                            <tr key={agency.id}>
-                                <td>{agency.id}</td>
-                                <td>{agency.name}</td>
-                                <td>{agency.address}</td>
-                                <td>{agency.email}</td>
-                                <td>
-                                    <button style={styles.buttonSmall} onClick={() => startEditing(agency)}>Edit</button>
-                                    <button style={styles.buttonDelete} onClick={() => deleteAgency(agency.id)}>Obriši</button>
-                                </td>
-                            </tr>
-                        ))}
-                        </tbody>
-                    </table>
+                        <button style={styles.button} type="submit">Sačuvaj</button>
+                        <button style={styles.buttonCancel} type="button" onClick={() => setEditingAgency(null)}>Odustani</button>
+                    </form>
                 )}
+
+                <div>
+                    <h3 style={styles.subTitle}>Lista agencija</h3>
+                    {agencies.length === 0 ? (
+                        <p>Nema upisanih agencija</p>
+                    ) : (
+                        <table style={styles.table}>
+                            <thead>
+                            <tr>
+                                <th style={styles.tableHeaderCell}>ID</th>
+                                <th style={styles.tableHeaderCell}>Naziv</th>
+                                <th style={styles.tableHeaderCell}>Adresa</th>
+                                <th style={styles.tableHeaderCell}>Email</th>
+                                <th style={styles.tableHeaderCell}>Akcije</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {agencies.map((agency) => (
+                                <tr key={agency.id}>
+                                    <td style={styles.tableCell}>{agency.id}</td>
+                                    <td style={styles.tableCell}>{agency.name}</td>
+                                    <td style={styles.tableCell}>{agency.address}</td>
+                                    <td style={styles.tableCell}>{agency.email}</td>
+                                    <td style={styles.tableCell}>
+                                        <button style={styles.buttonSmall} onClick={() => startEditing(agency)}>Edit</button>
+                                        <button style={styles.buttonDelete} onClick={() => deleteAgency(agency.id)}>Obriši</button>
+                                    </td>
+                                </tr>
+                            ))}
+                            </tbody>
+                        </table>
+                    )}
+                </div>
             </div>
         </div>
     );
@@ -174,6 +176,18 @@ const styles = {
         backgroundColor: '#e0f2f1',
         minHeight: '100vh'
     },
+    contentWrapper: {
+        width: '100%',
+        maxWidth: '1080px',
+        margin: '0 auto'
+    },
+    backButton: {
+        backgroundColor: '#ffffff',
+        border: 'none',
+        padding: '8px 12px',
+        borderRadius: '10px',
+        cursor: 'pointer'
+    },
     title: {
         color: '#00695c'
     },
@@ -184,13 +198,14 @@ const styles = {
         backgroundColor: '#ffffff',
         padding: '10px',
         marginBottom: '20px',
-        borderRadius: '8px'
+        borderRadius: '10px'
     },
     input: {
         display: 'block',
         marginBottom: '10px',
         padding: '8px',
         width: '240px',
+        borderRadius: '10px'
     },
     button: {
         backgroundColor: '#20b2aa',
@@ -199,7 +214,7 @@ const styles = {
         padding: '8px 16px',
         marginRight: '10px',
         cursor: 'pointer',
-        borderRadius: '4px'
+        borderRadius: '10px'
     },
     buttonCancel: {
         backgroundColor: '#c62828',
@@ -207,7 +222,7 @@ const styles = {
         border: 'none',
         padding: '8px 16px',
         cursor: 'pointer',
-        borderRadius: '4px'
+        borderRadius: '10px'
     },
     buttonSmall: {
         backgroundColor: '#20b2aa',
@@ -216,7 +231,7 @@ const styles = {
         padding: '5px 10px',
         marginRight: '5px',
         cursor: 'pointer',
-        borderRadius: '4px'
+        borderRadius: '10px'
     },
     buttonDelete: {
         backgroundColor: '#c62828',
@@ -224,12 +239,26 @@ const styles = {
         border: 'none',
         padding: '5px 10px',
         cursor: 'pointer',
-        borderRadius: '4px'
+        borderRadius: '10px'
     },
     table: {
         borderCollapse: 'collapse',
-        width: '100%'
+        width: '100%',
+        textAlign: 'left',
+        backgroundColor: '#ffffff',
+        borderRadius: '10px',
+        overflow: 'hidden'
     },
+    tableHeaderCell: {
+        textAlign: 'left',
+        padding: '10px',
+        borderBottom: '1px solid #cfd8dc'
+    },
+    tableCell: {
+        textAlign: 'left',
+        padding: '10px',
+        borderBottom: '1px solid #e0e0e0'
+    }
 };
 
 export default Agencies;
